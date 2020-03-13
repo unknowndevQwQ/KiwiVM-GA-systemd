@@ -1,0 +1,16 @@
+[Unit]
+Description=QEMU-KVM Guest Agent - KiwiVM Control Panel Guest Agent Service
+ConditionPathIsSymbolicLink=/dev/virtio-ports/kiwicomm.port0
+ConditionPathIsSymbolicLink=/dev/virtio-ports/kiwicomm.port1
+ConditionVirtualization=kvm
+
+[Service]
+# If the version of systemd is 240 or above, then uncommenting Type=exec and commenting out Type=simple
+#Type=exec
+Type=simple
+User=root
+ExecStart=/bin/qemu-kvm_ga
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
